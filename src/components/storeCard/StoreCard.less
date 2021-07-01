@@ -1,0 +1,41 @@
+@import '../generalAttribute.less';
+
+.store-card {
+  height: 20vh;
+  cursor: pointer;
+  border: 1px solid @main-color;
+  border-radius: 4px;
+  // flex: 1 1 40%;
+  flex-basis: 40%;
+  padding: 0.3rem;
+  margin: 0.3rem;
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: black;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      background: @main-color;
+      color: white;
+    }
+    @media screen and (max-width: 800px) {
+      font-size: large;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    flex-basis: 20%;
+  }
+
+  @media screen and (max-width: 980px) {
+    flex-basis: 40%;
+  }
+
+  @media screen and (max-width: 480px) {
+    flex-basis: 100%;
+  }
+}
