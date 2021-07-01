@@ -1,0 +1,19 @@
+@import '../generalAttribute.less';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: @main-color;
+  cursor: pointer;
+  width: 4rem;
+  height: 2rem;
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease-out;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+}
