@@ -37,7 +37,11 @@ function StoreCard(props) {
       </div>
       {isOpenModal && (
         <PopUpModal
+<<<<<<< HEAD
           title={`${text} Menu`}
+=======
+          title={`${text}'s Menu`}
+>>>>>>> 1f5228d4bc2b39cc657881d671ea6d7f49b7a3da
           renderContent={renderMenu}
           onClose={handleCloseModal}
         />
