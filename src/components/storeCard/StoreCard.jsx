@@ -7,7 +7,7 @@ import PopUpModal from '../modal/PopUpModal';
 import './StoreCard.less';
 
 function StoreCard(props) {
-  const { text = '', itemList = [] } = props;
+  const { storeName = '', itemList = [] } = props;
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -21,6 +21,7 @@ function StoreCard(props) {
 
   const renderMenu = () => (
     <Menu
+      storeName={storeName}
       itemList={itemList}
     />
   );
@@ -32,16 +33,12 @@ function StoreCard(props) {
         onClick={handleOpenModal}
       >
         <div className="content">
-          {text}
+          {storeName}
         </div>
       </div>
       {isOpenModal && (
         <PopUpModal
-<<<<<<< HEAD
-          title={`${text} Menu`}
-=======
-          title={`${text}'s Menu`}
->>>>>>> 1f5228d4bc2b39cc657881d671ea6d7f49b7a3da
+          title={`${storeName} Menu`}
           renderContent={renderMenu}
           onClose={handleCloseModal}
         />
@@ -51,7 +48,7 @@ function StoreCard(props) {
 }
 
 StoreCard.propTypes = {
-  text: PropTypes.string.isRequired,
+  storeName: PropTypes.string.isRequired,
   itemList: PropTypes.array.isRequired,
 };
 

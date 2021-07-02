@@ -18,7 +18,7 @@ function StoreList(props) {
           const itemList = _.get(store, 'itemList', []);
           return (
             <StoreCard
-              text={storeName}
+              storeName={storeName}
               itemList={itemList}
               key={index}
             />

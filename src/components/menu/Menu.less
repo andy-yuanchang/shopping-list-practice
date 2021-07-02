@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 @import '../generalAttribute.less';
 
-=======
->>>>>>> 1f5228d4bc2b39cc657881d671ea6d7f49b7a3da
 .menu {
   display: flex;
   justify-content: center;
@@ -11,35 +8,24 @@
   flex-wrap: wrap;
   .item {
     cursor: pointer;
-    width: 100%;
-<<<<<<< HEAD
     height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    align-content: center;
-    gap: 1rem;
-    font-size: 2rem;
-    &::before {
-      content: '';
-      width: 1rem;
-      height: 1rem;
-      border-top: 2px solid @main-color;
-      transform: translateY(50%);
+    flex-basis: 40%;
+    flex-direction: column;
+    .box-shadow-style();
+    .name {
+      font-size: 2rem;
     }
-    &::after {
-      content: '';
-      width: 1rem;
-      height: 1rem;
-      border-top: 2px solid @main-color;
-      border-right: 2px solid @main-color;;
-      transform: translateY(50%);
-=======
-    display: flex;
-    justify-content: center;
-    &:hover {
-      
->>>>>>> 1f5228d4bc2b39cc657881d671ea6d7f49b7a3da
+    .increase {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      &::before {
+        .plus-sign-style();
+        margin-right: 0.5rem;
+      }
     }
   }
 }

@@ -1,0 +1,25 @@
+@import '../generalAttribute.less';
+
+.ordered-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  > * {
+    flex-basis: 100%;
+  }
+  counter-reset: order-number;
+  .order-item {
+    counter-increment: order-number;
+    .box-shadow-style();
+    &::before {
+      content: 'Order ' counter(order-number);
+      border-bottom: 1px solid @font-color;
+    }
+    padding: 1rem;
+    .item {
+      padding: 1rem;
+    }
+  }
+}

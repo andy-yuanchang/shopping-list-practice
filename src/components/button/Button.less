@@ -11,9 +11,16 @@
   cursor: pointer;
   width: 4rem;
   height: 2rem;
-  &:hover {
-    transform: scale(1.05);
-    transition: transform 0.1s ease-out;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  .hover-style();
+  margin: 0.5rem;
+  border-radius: 4px;
+  &.small {
+    width: 3rem;
+  }
+  &.medium {
+    width: 6rem;
+  }
+  &.large {
+    width: 9rem;
   }
 }

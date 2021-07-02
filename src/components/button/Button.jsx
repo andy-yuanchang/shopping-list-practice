@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './Button.less';
 
 function Button(props) {
-  const { text, onClick } = props;
+  const { text, onClick, size = 'medium' } = props;
 
   return (
     <div
-      className="button"
+      className={`button ${size}`}
       onClick={onClick}
     >
       {text}
@@ -19,6 +19,7 @@ function Button(props) {
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  size: PropTypes.string,
 };
 
 export default Button;
