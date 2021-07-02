@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button order text large size`] = `
+<div
+  className="button large"
+  onClick={[Function]}
+>
+  order
+</div>
+`;
+
+exports[`Button order text large size 1`] = `
+<div
+  className="button large"
+  onClick={[Function]}
+>
+  order
+</div>
+`;
+
+exports[`Button order text medium size`] = `
+<div
+  className="button medium"
+  onClick={[Function]}
+>
+  order
+</div>
+`;
+
+exports[`Button order text medium size 1`] = `
+<div
+  className="button medium"
+  onClick={[Function]}
+>
+  order
+</div>
+`;
+
+exports[`Button order text small size`] = `
+<div
+  className="button small"
+  onClick={[Function]}
+>
+  order
+</div>
+`;
+
+exports[`Button order text small size 1`] = `
+<div
+  className="button small"
+  onClick={[Function]}
+>
+  order
+</div>
+`;
+
+exports[`Button undefined large size`] = `
+<div
+  className="button large"
+  onClick={[Function]}
+>
+  undefined
+</div>
+`;
+
+exports[`Button undefined large size 1`] = `
+<div
+  className="button large"
+  onClick={[Function]}
+>
+  undefined
+</div>
+`;
+
+exports[`Button undefined medium size`] = `
+<div
+  className="button medium"
+  onClick={[Function]}
+>
+  undefined
+</div>
+`;
+
+exports[`Button undefined medium size 1`] = `
+<div
+  className="button medium"
+  onClick={[Function]}
+>
+  undefined
+</div>
+`;
+
+exports[`Button undefined small size`] = `
+<div
+  className="button small"
+  onClick={[Function]}
+>
+  undefined
+</div>
+`;
+
+exports[`Button undefined small size 1`] = `
+<div
+  className="button small"
+  onClick={[Function]}
+>
+  undefined
+</div>
+`;

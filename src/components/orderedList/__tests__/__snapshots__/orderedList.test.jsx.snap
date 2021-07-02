@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderedList default view 1`] = `
+<div
+  className="ordered-list"
+>
+  <div
+    className="order-item"
+  >
+    <div
+      className="item"
+    >
+      kebuke bubble tea x 5
+    </div>
+  </div>
+  <div
+    className="order-item"
+  >
+    <div
+      className="item"
+    >
+      i lan rumen x 2
+    </div>
+  </div>
+  <div
+    className="order-item"
+  >
+    <div
+      className="item"
+    >
+      7-11 coke x 15
+    </div>
+  </div>
+  <div
+    className="order-item"
+  >
+    <div
+      className="item"
+    >
+      family mart beer x 24
+    </div>
+  </div>
+</div>
+`;
+
+exports[`OrderedList empty view 1`] = `
+<div
+  className="ordered-list"
+/>
+`;

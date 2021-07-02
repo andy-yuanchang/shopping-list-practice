@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
 import OrderedList from './components/orderedList/OrderedList';
 import ShoppingCart from './components/shoppingCart/ShoppingCart';
@@ -15,6 +15,7 @@ const ModalEnum = {
 
 function App() {
   const [modalType, setModalType] = useState('');
+  const app = useRef(null);
 
   const handleOpenOrderedList = () => {
     setModalType(ModalEnum.ORDERED_LIST);
@@ -72,8 +73,10 @@ function App() {
   };
 
   return (
-    <div id="app">
-      {renderButtons()}
+    <div id="app" ref={app}>
+      <div className="nav-bar">
+        {renderButtons()}
+      </div>
       <StoreList />
       {
         modalType && (

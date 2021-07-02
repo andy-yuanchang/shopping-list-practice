@@ -1,28 +1,21 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import Button from '../button/Button';
 
 import './OrderedList.less';
 
 function OrderedList(props) {
-  const dispatch = useDispatch();
   const orederedList = useSelector((state) => state.order.list);
-
-  const handleEditOrder = () => {
-
-  };
 
   const renderItemList = (itemList) => (
     <>
       {
-          itemList.map((item, index) => (
-            <div className="item" key={index}>
-              {`${item.storeName} ${item.name} x ${item.count}`}
-            </div>
-          ))
-        }
+        itemList.map((item, index) => (
+          <div className="item" key={index}>
+            {`${item.storeName} ${item.name} x ${item.count}`}
+          </div>
+        ))
+      }
     </>
   );
 

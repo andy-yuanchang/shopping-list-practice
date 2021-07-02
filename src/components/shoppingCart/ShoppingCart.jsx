@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Button from '../button/Button';
+import * as fromMessageHelper from '../../js/messageHelper';
 
 import {
   addItem,
@@ -38,10 +39,14 @@ function ShoppingCart(props) {
   };
 
   const handleAddOrder = () => {
+    if (itemList.length === 0) {
+      return fromMessageHelper.addWarning('Your Cart is Empty!');
+    }
     dispatch(addOrder({
       itemList,
     }));
     dispatch(clearAllItems());
+    fromMessageHelper.addMessageSaved();
     onClose();
   };
 

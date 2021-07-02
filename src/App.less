@@ -8,9 +8,19 @@
 
 #app {
   color: @font-color;
-  .buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin: 0.5rem;
+  .nav-bar {
+    top: 0;
+    z-index: 1200;
+    position: fixed;
+    width: 100%;
+    transition: top 200ms;
+    height: 4rem;
+    background: white;
+    .box-shadow-style();
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0.5rem;
+    }
   }
 }
