@@ -1,10 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import './OrderedList.less';
 
-function OrderedList(props) {
+function OrderedList() {
   const orederedList = useSelector((state) => state.order.list);
 
   const renderItemList = (itemList) => (
@@ -33,7 +31,7 @@ function OrderedList(props) {
 }
 
 OrderedList.propTypes = {
-  orderedList: PropTypes.arrayOf(PropTypes.object),
+
 };
 
 export default OrderedList;

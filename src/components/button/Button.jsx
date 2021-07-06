@@ -10,6 +10,10 @@ function Button(props) {
     <div
       className={`button ${size}`}
       onClick={onClick}
+      onKeyDown={undefined}
+      role="button"
+      tabIndex={0}
+      aria-label="button"
     >
       {text}
     </div>
@@ -18,8 +22,8 @@ function Button(props) {
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  size: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  size: PropTypes.string.isRequired,
 };
 
 export default Button;

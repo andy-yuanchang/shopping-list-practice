@@ -18,5 +18,7 @@
         "react"
     ],
     "rules": {
+        "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
+        "react/no-array-index-key": 1
     }
 }
