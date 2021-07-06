@@ -1,8 +1,5 @@
 import {
   ADD_ORDER,
-  DELETE_ORDERS,
-  EDIT_ORDER,
-  CHECK_ORDER,
 } from '../actions/orderActions';
 
 const initialState = {
@@ -23,19 +20,7 @@ export default function orderReducer(state = initialState, action) {
           ],
         };
       }
-      // case DELETE_ORDERS:
-
-      //   return {
-
-      //   };
-      // case EDIT_ORDER:
-      //   return {
-
-      //   };
-      // case CHECK_ORDER:
-      //   return {
-
-    //   };
+      return state;
     default:
       return state;
   }

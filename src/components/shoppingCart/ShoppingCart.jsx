@@ -1,20 +1,14 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import Button from '../button/Button';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as fromMessageHelper from '../../js/messageHelper';
-
-import {
-  addItem,
-  deleteItem,
-  clearAllItems,
-} from '../../redux/actions/shoppingCartActions';
-
 import {
   addOrder,
 } from '../../redux/actions/orderActions';
-
+import {
+  addItem, clearAllItems, deleteItem,
+} from '../../redux/actions/shoppingCartActions';
+import Button from '../button/Button';
 import './ShoppingCart.less';
 
 function ShoppingCart(props) {
@@ -30,13 +24,11 @@ function ShoppingCart(props) {
     }));
   };
 
-  const handleDeleteItem = (item) => {
-    dispatch(deleteItem({
-      storeName: item.storeName,
-      name: item.name,
-      count: 1,
-    }));
-  };
+  const handleDeleteItem = (item) => dispatch(deleteItem({
+    storeName: item.storeName,
+    name: item.name,
+    count: 1,
+  }));
 
   const handleAddOrder = () => {
     if (itemList.length === 0) {
@@ -47,7 +39,7 @@ function ShoppingCart(props) {
     }));
     dispatch(clearAllItems());
     fromMessageHelper.addMessageSaved();
-    onClose();
+    return onClose();
   };
 
   return (
@@ -58,9 +50,23 @@ function ShoppingCart(props) {
             <div className="store-name">{item.storeName}</div>
             <div className="item-name">{item.name}</div>
             <div className="count-area">
-              <div className="decrease" onClick={() => handleDeleteItem(item)} />
+              <div
+                className="decrease"
+                onClick={() => handleDeleteItem(item)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={undefined}
+                aria-label="decrease a item"
+              />
               <div className="count">{item.count}</div>
-              <div className="increase" onClick={() => handleAddItem(item)} />
+              <div
+                className="increase"
+                onClick={() => handleAddItem(item)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={undefined}
+                aria-label="increase a item"
+              />
             </div>
           </div>
         ))
@@ -77,7 +83,6 @@ function ShoppingCart(props) {
 }
 
 ShoppingCart.propTypes = {
-  itemList: PropTypes.arrayOf(PropTypes.object),
   onClose: PropTypes.func.isRequired,
 };
 

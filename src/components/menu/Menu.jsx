@@ -35,6 +35,10 @@ function Menu(props) {
               onClick={() => {
                 handleAddItem(item.name);
               }}
+              onKeyDown={undefined}
+              tabIndex={0}
+              role="button"
+              aria-label="increase a item"
             />
           </div>
         ))
@@ -45,6 +49,7 @@ function Menu(props) {
 
 Menu.propTypes = {
   itemList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  storeName: PropTypes.string.isRequired,
 };
 
 export default Menu;

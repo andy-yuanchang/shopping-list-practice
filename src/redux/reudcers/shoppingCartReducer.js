@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   ADD_ITEM,
   DELETE_ITEM,
@@ -13,17 +14,17 @@ const initialState = {
 export default function shoppingCartReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_ITEM: {
-      const index = state.list.findIndex((item) => item.name === action.payload.name && item.storeName === action.payload.storeName);
+      const index = state.list.findIndex((item) => {
+        const hasSameItemName = item.name === action.payload.name;
+        const hasSameStoreName = item.storeName === action.payload.storeName;
+        const isItemMatched = hasSameItemName && hasSameStoreName;
+        return isItemMatched;
+      });
       if (index !== -1) {
-        const previousCount = state.list[index].count;
-        action.payload.count += previousCount;
-        state.list[index] = action.payload;
-        return {
-          ...state,
-          list: [
-            ...state.list,
-          ],
-        };
+        const newState = _.cloneDeep(state);
+        const previousCount = newState.list[index].count;
+        newState.list[index] = action.payload.count + previousCount;
+        return newState;
       }
       return {
         ...state,
@@ -34,21 +35,20 @@ export default function shoppingCartReducer(state = initialState, action) {
       };
     }
     case DELETE_ITEM: {
-      const index = state.list.findIndex((item) => item.name === action.payload.name && item.storeName === action.payload.storeName);
+      const index = state.list.findIndex(
+        (item) => item.name === action.payload.name && item.storeName === action.payload.storeName,
+      );
+      const newState = _.cloneDeep(state);
       if (index !== -1) {
-        const remainCount = state.list[index].count - action.payload.count;
+        const remainCount = newState.list[index].count - action.payload.count;
         if (remainCount <= 0) {
-          state.list.splice(index, 1);
+          newState.list.splice(index, 1);
         } else {
-          state.list[index].count = remainCount;
+          newState.list[index].count = remainCount;
         }
-        return {
-          ...state,
-          list: [
-            ...state.list,
-          ],
-        };
+        return newState;
       }
+      return newState;
     }
     case CLEAR_ALL_ITEMS: {
       return {

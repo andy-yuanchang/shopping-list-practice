@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../button/Button';
-
 import './PopUpModal.less';
 
 function PopUpModal(props) {
@@ -10,18 +8,18 @@ function PopUpModal(props) {
 
   const modal = useRef(null);
 
+  const handleClick = (e) => {
+    if (e.target.classList.contains('pop-up-modal')) {
+      onClose();
+    }
+  };
+
   useEffect(() => {
     modal.current.addEventListener('click', handleClick);
     return () => {
       modal.current.removeEventListener('click', handleClick);
     };
   });
-
-  const handleClick = (e) => {
-    if (e.target.classList.contains('pop-up-modal')) {
-      onClose();
-    }
-  };
 
   return (
     <div className="pop-up-modal" ref={modal}>
@@ -38,8 +36,8 @@ function PopUpModal(props) {
 }
 
 PopUpModal.propTypes = {
-  title: PropTypes.string,
-  renderContent: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  renderContent: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

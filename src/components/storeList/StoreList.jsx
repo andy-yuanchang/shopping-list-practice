@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import StoreCard from '../storeCard/StoreCard';
@@ -7,11 +6,11 @@ import StoreCard from '../storeCard/StoreCard';
 import data from '../../assets/storeListData.json';
 import './StoreList.less';
 
-function StoreList(props) {
+function StoreList() {
   const storeListArr = _.get(data, 'storeList', []);
 
   return (
-    <div className="store-list">
+    <div className="store-list" role="menu">
       {
         storeListArr.map((store, index) => {
           const storeName = _.get(store, 'name', '');

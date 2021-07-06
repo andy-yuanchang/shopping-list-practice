@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
+import React, { useState } from 'react';
 import Menu from '../menu/Menu';
 import PopUpModal from '../modal/PopUpModal';
-
 import './StoreCard.less';
 
 function StoreCard(props) {
@@ -31,6 +29,9 @@ function StoreCard(props) {
       <div
         className="store-card"
         onClick={handleOpenModal}
+        onKeyDown={undefined}
+        role="menuitem"
+        tabIndex={0}
       >
         <div className="content">
           {storeName}
@@ -49,7 +50,7 @@ function StoreCard(props) {
 
 StoreCard.propTypes = {
   storeName: PropTypes.string.isRequired,
-  itemList: PropTypes.array.isRequired,
+  itemList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default StoreCard;
