@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
+
+import theme from './theme';
 
 import {
   config as messageConfig,
@@ -19,6 +22,7 @@ function InitSnackbar() {
 
   return (
     <Provider store={store}>
+      <CssBaseline />
       <App />
     </Provider>
   );
@@ -41,14 +45,16 @@ function InitApp() {
   }
 
   return (
-    <SnackbarProvider
-      maxSnack={messageStackNum}
-      anchorOrigin={messagePopupDirection}
-      preventDuplicate={preventDuplicateMessage}
-      classes={overrideStyle}
-    >
-      <InitSnackbar />
-    </SnackbarProvider>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider
+        maxSnack={messageStackNum}
+        anchorOrigin={messagePopupDirection}
+        preventDuplicate={preventDuplicateMessage}
+        classes={overrideStyle}
+      >
+        <InitSnackbar />
+      </SnackbarProvider>
+    </ThemeProvider>
   );
 }
 

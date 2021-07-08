@@ -5,6 +5,7 @@ import ShoppingCart from './components/shoppingCart/ShoppingCart';
 import StoreList from './components/storeList/StoreList';
 import PopUpModal from './components/modal/PopUpModal';
 import Button from './components/button/Button';
+import SignUp from './components/SignUp/SignUp';
 
 import './App.less';
 
@@ -77,6 +78,7 @@ function App() {
       <div className="nav-bar">
         {renderButtons()}
       </div>
+      <SignUp />
       <StoreList />
       {
         modalType && (
