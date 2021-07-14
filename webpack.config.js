@@ -59,6 +59,7 @@ const cfg = {
     port: 8080,
     https: false,
     contentBase: path.resolve(__dirname, 'dist'),
+    historyApiFallback: true
     // publicPath: path.resolve(__dirname, 'dist')
   },
   plugins: [

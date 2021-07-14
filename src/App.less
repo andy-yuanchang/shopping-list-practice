@@ -6,6 +6,10 @@
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 #app {
   color: @font-color;
   .nav-bar {
@@ -17,10 +21,44 @@
     height: 4rem;
     background: white;
     .box-shadow-style();
-    .buttons {
+    .nav-bar-set {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       margin: 0.5rem;
     }
+    .avatar {
+      .hover-style();
+      cursor: pointer;
+    }
+    .toggle {
+      position: relative;
+      margin-left: 0.4rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      &::after {
+        content: '\25BC';
+        transition: all 0.1s linear;
+      }
+      &.up {
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+      .drop-down-list {
+        position: absolute;
+        transform: translate3d(0, 100%, 0);
+        .box-shadow-style();
+        background: white;
+        .item {
+
+        }
+      }
+    }
   }
+  padding-top: 4rem;
 }

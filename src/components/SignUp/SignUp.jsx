@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Avatar,
   Button,
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid,
-  Box,
   Typography,
   Container,
 } from '@material-ui/core';
@@ -16,20 +15,7 @@ import {
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from '../../contexts/AuthContext';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      .
-    </Typography>
-  );
-}
+import * as fromMessageHelper from '../../js/messageHelper';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -53,6 +39,111 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const { signUp } = useAuth();
+  const history = useHistory();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!email || !password || !passwordConfirm) {
+      return fromMessageHelper.addError('email, password and password confirmation can not be empty');
+    }
+
+    if (password !== passwordConfirm) {
+      return fromMessageHelper.addError('password not matched');
+    }
+
+    try {
+      await signUp(email, password);
+      history.push('/login');
+      return fromMessageHelper.addSuccess('Sign up succeed');
+    } catch (error) {
+      return fromMessageHelper.addError(error.message);
+    }
+  }
+
+  function renderFirstNameField() {
+    return (
+      <TextField
+        autoComplete="fname"
+        name="firstName"
+        variant="outlined"
+        required
+        fullWidth
+        id="firstName"
+        label="First Name"
+        autoFocus
+      />
+    );
+  }
+
+  function renderLastNameField() {
+    return (
+      <TextField
+        variant="outlined"
+        required
+        fullWidth
+        id="lastName"
+        label="Last Name"
+        name="lastName"
+        autoComplete="lname"
+      />
+    );
+  }
+
+  function renderEmailField() {
+    return (
+      <TextField
+        variant="outlined"
+        required
+        fullWidth
+        id="email"
+        label="Email Address"
+        name="email"
+        autoComplete="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+    );
+  }
+
+  function renderPasswordField() {
+    return (
+      <TextField
+        variant="outlined"
+        required
+        fullWidth
+        name="password"
+        label="Password"
+        type="password"
+        id="password"
+        autoComplete="current-password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+    );
+  }
+
+  function renderPasswordConfirmField() {
+    return (
+      <TextField
+        variant="outlined"
+        required
+        fullWidth
+        name="passwordConfirm"
+        label="passwordConfirm"
+        type="password"
+        id="passwordConfirm"
+        autoComplete="current-passwordConfirm"
+        value={passwordConfirm}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
+      />
+    );
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,51 +156,20 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
+            {/* <Grid item xs={12} sm={6}>
+              {renderFirstNameField()}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
+              {renderLastNameField()}
+            </Grid> */}
+            <Grid item xs={12}>
+              {renderEmailField()}
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
+              {renderPasswordField()}
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+              {renderPasswordConfirmField()}
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
@@ -124,21 +184,19 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }

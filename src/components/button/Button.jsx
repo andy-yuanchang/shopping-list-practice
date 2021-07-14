@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import './Button.less';
 
 function Button(props) {
-  const { text, onClick, size = 'medium' } = props;
+  const {
+    text, onClick, size = 'medium', render,
+  } = props;
 
   return (
     <div
@@ -14,7 +16,9 @@ function Button(props) {
       role="button"
       tabIndex={0}
       aria-label="button"
+      title={text}
     >
+      {render && render()}
       {text}
     </div>
   );
@@ -24,6 +28,7 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   size: PropTypes.string.isRequired,
+  render: PropTypes.func,
 };
 
 export default Button;

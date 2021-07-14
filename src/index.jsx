@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
+import { AuthProvider } from './contexts/AuthContext';
 
 import theme from './theme';
 
@@ -52,7 +53,9 @@ function InitApp() {
         preventDuplicate={preventDuplicateMessage}
         classes={overrideStyle}
       >
-        <InitSnackbar />
+        <AuthProvider>
+          <InitSnackbar />
+        </AuthProvider>
       </SnackbarProvider>
     </ThemeProvider>
   );
