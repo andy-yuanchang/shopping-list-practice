@@ -8,14 +8,16 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 import OrderedList from './components/orderedList/OrderedList';
 import ShoppingCart from './components/shoppingCart/ShoppingCart';
 import StoreList from './components/storeList/StoreList';
 import PopUpModal from './components/modal/PopUpModal';
-import Button from './components/button/Button';
+// import Button from './components/button/Button';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
+import DropDownMenu from './components/DropDownMenu/DropDownMenu';
 import * as fromMessageHelper from './js/messageHelper';
 import { useAuth } from './contexts/AuthContext';
 
@@ -36,18 +38,9 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [modalType, setModalType] = useState('');
-  const [isToggle, setIsToggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { currentUser, logout } = useAuth();
   const app = useRef(null);
-
-  const handleOpenOrderedList = () => {
-    // setModalType(ModalEnum.ORDERED_LIST);
-  };
-
-  const handleOpenCart = () => {
-    // setModalType(ModalEnum.CART);
-
-  };
 
   const handleCloseModal = () => {
     setModalType('');
@@ -55,73 +48,77 @@ function App() {
 
   const renderButtons = () => (
     <>
-      <Link to="/">
-        <Button
-          text="Home Page"
-          onClick={handleOpenOrderedList}
-          size="large"
-          render={() => (<HomeIcon />)}
-        />
-      </Link>
-      <Link to="/history">
-        <Button
-          text="History Orders"
-          onClick={handleOpenOrderedList}
-          size="large"
-          render={() => (<ListAltIcon />)}
-        />
-      </Link>
-      <Link to="/cart">
-        <Button
-          text="Cart"
-          onClick={handleOpenCart}
-          size="large"
-          render={() => (<ShoppingCartIcon />)}
-        />
-      </Link>
+      <div className="menu">
+        <Link to="/">
+          <Button
+            startIcon={<HomeIcon />}
+            color="primary"
+          >
+            Home Page
+          </Button>
+        </Link>
+        <Link to="/history">
+          <Button
+            startIcon={<ListAltIcon />}
+            color="primary"
+          >
+            History Orders
+          </Button>
+        </Link>
+        <Link to="/cart">
+          <Button
+            startIcon={<ShoppingCartIcon />}
+            color="primary"
+          >
+            Cart
+          </Button>
+        </Link>
+      </div>
       {
         currentUser
           ? (
-            <Avatar
-              className={`${classes.avatar} avatar`}
-              alt={currentUser.email}
-              title={currentUser.email}
-            >
-              <PersonIcon />
-            </Avatar>
+            <div className="user-info">
+              <Avatar
+                className={`${classes.avatar} avatar`}
+                alt={currentUser.email}
+                title={currentUser.email}
+              >
+                <PersonIcon />
+              </Avatar>
+              <div
+                className={`arrow ${isOpen ? 'up' : 'down'}`}
+                onClick={() => setIsOpen((v) => !v)}
+              >
+                <DropDownMenu
+                  list={getUserDropDownList()}
+                  isOpen={isOpen}
+                />
+              </div>
+
+            </div>
           ) : (
             <Link to="/login">
               <Button
-                text="Sign In"
-                size="large"
-              />
+                color="primary"
+              >
+                Sign In
+              </Button>
             </Link>
           )
       }
-      {
-        currentUser && (
-          <div
-            className={`toggle ${isToggle ? 'up' : 'down'}`}
-            onClick={() => setIsToggle((v) => !v)}
-          >
-            <div
-              className="drop-down-list"
-              hidden={!isToggle}
-              scrollbars
-            >
-              <tab className="item">
-                <Button
-                  text="Log Out"
-                  size="large"
-                  onClick={handleLogOut}
-                />
-              </tab>
-            </div>
-          </div>
-        )
-      }
     </>
   );
+
+  function getUserDropDownList() {
+    return [
+      <Button
+        color="primary"
+        onClick={handleLogOut}
+      >
+        Log Out
+      </Button>,
+    ];
+  }
 
   const handleLogOut = async () => {
     try {

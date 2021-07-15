@@ -40,8 +40,8 @@ export default function Login() {
   const location = useLocation();
   const auth = useAuth();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function renderEmailField() {
     return (
@@ -107,7 +107,6 @@ export default function Login() {
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"

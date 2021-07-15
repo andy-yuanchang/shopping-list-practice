@@ -156,12 +156,6 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {/* <Grid item xs={12} sm={6}>
-              {renderFirstNameField()}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {renderLastNameField()}
-            </Grid> */}
             <Grid item xs={12}>
               {renderEmailField()}
             </Grid>
@@ -171,12 +165,12 @@ export default function SignUp() {
             <Grid item xs={12}>
               {renderPasswordConfirmField()}
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"
