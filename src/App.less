@@ -58,6 +58,69 @@ a {
         }
       }
     }
+    .toggle-button {
+      display: none;
+    }
+    @media screen and (max-width: 640px) {
+      box-shadow: none;
+      background: unset;
+      .toggle-button {
+        display: flex;
+        flex-wrap: wrap;
+        height: 1.5rem;
+        width: 1.5rem;
+        position: absolute;
+        right: 0;
+        transform: translateY(50%);
+        z-index: 999;
+        margin-right: 0.5rem;
+        .topBar, .middleBar, .bottomBar {
+          border-top: 2px solid @font-color;
+          flex-basis: 100%;
+          transition: all 0.3s ease-in-out;
+          height: 0;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+        &.close {
+          .topBar {
+            transform-origin: center;
+            transform: translate(0%, 400%) rotate(45deg);
+          }
+          .middleBar {
+            opacity: 0;
+          }
+          .bottomBar {
+            transform-origin: center;
+            transform: translate(0%, -400%) rotate(-45deg);
+          }
+        }
+      }
+      .nav-bar-set {
+        transition: all 0.3s ease-in-out;
+        width: 25vw;
+        position: fixed;
+        right: 0;
+        height: 100vh;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        background: white;
+        margin: 0;
+        .box-shadow-style();
+        .user-info {
+          flex-basis: 10%;
+          margin-top: 2rem;
+          z-index: 999;
+        }
+        .menu {
+          flex-basis: 20%;
+        }
+        &.hidden {
+          transform: translateX(100%);
+        }
+      }
+    }
   }
   padding-top: 4rem;
 }

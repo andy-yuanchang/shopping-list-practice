@@ -39,12 +39,24 @@ function App() {
   const classes = useStyles();
   const [modalType, setModalType] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
   const { currentUser, logout } = useAuth();
   const app = useRef(null);
 
   const handleCloseModal = () => {
     setModalType('');
   };
+
+  const renderToggle = () => (
+    <div
+      className={`toggle-button ${isOpenMenu ? 'close' : 'open'}`}
+      onClick={() => setIsOpenMenu(v => !v)}
+    >
+      <div className="topBar" />
+      <div className="middleBar" />
+      <div className="bottomBar" />
+    </div>
+  )
 
   const renderButtons = () => (
     <>
@@ -178,7 +190,8 @@ function App() {
     <div id="app" ref={app}>
       <Router>
         <div className="nav-bar">
-          <div className="nav-bar-set">
+          {renderToggle()}
+          <div className={`nav-bar-set ${isOpenMenu || 'hidden'}`}>
             {renderButtons()}
           </div>
         </div>
