@@ -50,7 +50,7 @@ export default function DropDownMenu(props) {
   useEffect(() => {
     observerRef.current = new IntersectionObserver((entires) => {
       const entry = entires[0];
-      console.log(entry.boundingClientRect, entry.intersectionRect);
+      console.log(entry.intersectionRatio, entry.boundingClientRect, entry.intersectionRect);
       if (entry.intersectionRatio < 1) {
         const { boundingClientRect, intersectionRect } = entry;
         const rOffset = boundingClientRect.right - intersectionRect.right;

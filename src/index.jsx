@@ -1,18 +1,19 @@
+import { CssBaseline } from '@material-ui/core';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { SnackbarProvider, useSnackbar } from 'notistack';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import {
+  BrowserRouter as Router, Route
+} from 'react-router-dom';
+import App from './App';
 import { AuthProvider } from './contexts/AuthContext';
-
-import theme from './theme';
-
 import {
   config as messageConfig,
-  setSnackBar,
+  setSnackBar
 } from './js/messageHelper';
-import App from './App';
+import theme from './js/theme';
 import store from './redux';
 
 function InitSnackbar() {
@@ -24,7 +25,9 @@ function InitSnackbar() {
   return (
     <Provider store={store}>
       <CssBaseline />
-      <App />
+      <Router>
+        <Route path="/" component={App} />
+      </Router>
     </Provider>
   );
 }

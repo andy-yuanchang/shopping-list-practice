@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -39,9 +39,29 @@ export default function Login() {
   const history = useHistory();
   const location = useLocation();
   const auth = useAuth();
+  const buttonRef = useRef(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleKeyDown = useCallback(async event => {
+    if (event.keyCode === 13) {
+      const { from } = location.state || { from: { pathname: '/' } };
+      try {
+        await auth.login(email, password);
+        history.push(from);
+      } catch (error) {
+        fromMessageHelper.addError(error.message);
+      }
+    }
+  }, [])
+  
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [handleKeyDown])
 
   function renderEmailField() {
     return (
@@ -112,6 +132,7 @@ export default function Login() {
             color="primary"
             className={classes.submit}
             onClick={handleLogin}
+            ref={buttonRef}
           >
             Sign In
           </Button>

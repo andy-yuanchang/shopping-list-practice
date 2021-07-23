@@ -27,8 +27,10 @@ a {
       align-items: center;
       height: 100%;
       margin-right: 0.5rem;
-      .menu {
-        
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
       }
       .user-info {
         display: flex;
@@ -61,7 +63,7 @@ a {
     .toggle-button {
       display: none;
     }
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 768px) {
       box-shadow: none;
       background: unset;
       .toggle-button {
@@ -70,10 +72,10 @@ a {
         height: 1.5rem;
         width: 1.5rem;
         position: absolute;
-        right: 0;
+        left: 0;
         transform: translateY(50%);
         z-index: 999;
-        margin-right: 0.5rem;
+        margin-left: 0.5rem;
         .topBar, .middleBar, .bottomBar {
           border-top: 2px solid @font-color;
           flex-basis: 100%;
@@ -99,25 +101,30 @@ a {
       }
       .nav-bar-set {
         transition: all 0.3s ease-in-out;
-        width: 25vw;
+        width: 50vw;
         position: fixed;
-        right: 0;
+        left: 0;
         height: 100vh;
         flex-direction: column-reverse;
         justify-content: flex-end;
+        align-items: flex-start;
         background: white;
         margin: 0;
+        padding: 0.5rem;
         .box-shadow-style();
         .user-info {
           flex-basis: 10%;
           margin-top: 2rem;
           z-index: 999;
         }
-        .menu {
+        .nav-buttons {
           flex-basis: 20%;
+          & > * {
+            flex-basis: 100%;
+          }
         }
         &.hidden {
-          transform: translateX(100%);
+          transform: translateX(-100%);
         }
       }
     }

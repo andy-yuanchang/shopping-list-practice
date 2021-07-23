@@ -19,6 +19,7 @@ function OrderedList() {
 
   return (
     <div className="ordered-list">
+      <h1 className="title">History Orders</h1>
       {
         orederedList.map((order, index) => (
           <div className="order-item" key={index}>

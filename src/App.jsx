@@ -1,26 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
-  BrowserRouter as Router, Switch, Route, Link, useHistory, Redirect,
-} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
-import PersonIcon from '@material-ui/icons/Person';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import HomeIcon from '@material-ui/icons/Home';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import { makeStyles } from '@material-ui/core/styles';
+import HomeIcon from '@material-ui/icons/Home';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import PersonIcon from '@material-ui/icons/Person';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import React, { useRef, useState } from 'react';
+import { Link, Route, Redirect, Switch } from 'react-router-dom';
+import DropDownMenu from './components/DropDownMenu/DropDownMenu';
+import PopUpModal from './components/modal/PopUpModal';
+import Login from './components/Login/Login';
+import SignUp from './components/SignUp/SignUp';
 import OrderedList from './components/orderedList/OrderedList';
 import ShoppingCart from './components/shoppingCart/ShoppingCart';
 import StoreList from './components/storeList/StoreList';
-import PopUpModal from './components/modal/PopUpModal';
-// import Button from './components/button/Button';
-import SignUp from './components/SignUp/SignUp';
-import Login from './components/Login/Login';
-import DropDownMenu from './components/DropDownMenu/DropDownMenu';
-import * as fromMessageHelper from './js/messageHelper';
+import RedirectLoginRoute from './js/redirectLoginRoute';
 import { useAuth } from './contexts/AuthContext';
-
+import * as fromMessageHelper from './js/messageHelper';
 import './App.less';
 
 const ModalEnum = {
@@ -50,7 +46,14 @@ function App() {
   const renderToggle = () => (
     <div
       className={`toggle-button ${isOpenMenu ? 'close' : 'open'}`}
-      onClick={() => setIsOpenMenu(v => !v)}
+      onClick={() => {
+        setIsOpenMenu(v => {
+          if (v) {
+            setIsOpen(false)
+          }
+          return !v
+        })
+      }}
     >
       <div className="topBar" />
       <div className="middleBar" />
@@ -58,10 +61,19 @@ function App() {
     </div>
   )
 
+  function handleOpenDropDownMenu() {
+    setIsOpen(true)
+  }
+
+  function handleCloseDropDownMenu(e) {
+    // if (e.target.className.contains())
+    setIsOpen(false)
+  }
+
   const renderButtons = () => (
     <>
-      <div className="menu">
-        <Link to="/">
+      <div className="nav-buttons">
+        <Link to="/storelist">
           <Button
             startIcon={<HomeIcon />}
             color="primary"
@@ -100,7 +112,8 @@ function App() {
                 </Avatar>
                 <div
                   className={`arrow ${isOpen ? 'up' : 'down'}`}
-                  onClick={() => setIsOpen((v) => !v)}
+                  onMouseEnter={handleOpenDropDownMenu}
+                  onMouseLeave={handleCloseDropDownMenu}
                 >
                   <DropDownMenu
                     list={getUserDropDownList()}
@@ -189,47 +202,25 @@ function App() {
 
   return (
     <div id="app" ref={app}>
-      <Router>
-        <div className="nav-bar">
-          {renderToggle()}
-          <div className={`nav-bar-set ${isOpenMenu || 'hidden'}`}>
-            {renderButtons()}
-          </div>
+      <div className="nav-bar">
+        {renderToggle()}
+        <div className={`nav-bar-set ${isOpenMenu || 'hidden'}`}>
+          {renderButtons()}
         </div>
-        <Switch>
-          <Route exact path="/" component={renderMainPage} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/cart">
-            <ShoppingCart
-              onClose={handleCloseModal}
-            />
-          </PrivateRoute>
-          <PrivateRoute path="/history">
-            <OrderedList />
-          </PrivateRoute>
-        </Switch>
-      </Router>
+      </div>
+      <Switch>
+        <Route path="/storelist" component={StoreList} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
+        <RedirectLoginRoute path="/cart">
+          <ShoppingCart />
+        </RedirectLoginRoute>
+        <RedirectLoginRoute path="/history">
+          <OrderedList />
+        </RedirectLoginRoute>
+        <Redirect to="/storelist" />
+      </Switch>
     </div>
-  );
-}
-
-function PrivateRoute({ children, ...rest }) {
-  const { currentUser } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={({ location }) => (currentUser ? (
-        children
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: location },
-          }}
-        />
-      ))}
-    />
   );
 }
 

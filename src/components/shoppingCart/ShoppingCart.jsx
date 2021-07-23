@@ -44,6 +44,9 @@ function ShoppingCart(props) {
 
   return (
     <div className="shopping-cart">
+      <h1 className="title">
+        Items in Cart
+      </h1>
       {
         itemList.map((item, index) => (
           <div className="item" key={index}>

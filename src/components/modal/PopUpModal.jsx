@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PopUpModal.less';
@@ -6,23 +6,14 @@ import './PopUpModal.less';
 function PopUpModal(props) {
   const { title = '', renderContent, onClose } = props;
 
-  const modal = useRef(null);
-
   const handleClick = (e) => {
     if (e.target.classList.contains('pop-up-modal')) {
       onClose();
     }
   };
 
-  useEffect(() => {
-    modal.current.addEventListener('click', handleClick);
-    return () => {
-      modal.current.removeEventListener('click', handleClick);
-    };
-  });
-
   return (
-    <div className="pop-up-modal" ref={modal}>
+    <div className="pop-up-modal" onClick={handleClick}>
       <div className="modal-area">
         <div className="modal-title">
           {title}
